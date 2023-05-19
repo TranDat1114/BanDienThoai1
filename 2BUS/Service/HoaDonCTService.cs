@@ -13,11 +13,17 @@ namespace _2BUS.Service
 {
     public class HoaDonCTService : IHoaDonCTService_
     {
-        IHoaDonRepos _HD = new HoaDonRepos();
-        IDTCTRepos _IDTCT= new DTCTRepos();
-        IHoaDonCTRepos _hoaDonCTRepos = new HoaDonCTRepos();
-        List<HoaDonChiTiet> _lsthdct = new List<HoaDonChiTiet>();
-        IDTRepos _DT = new DTRepos();
+        IHoaDonRepos _HD;
+        IDTCTRepos _IDTCT;
+        IHoaDonCTRepos _hoaDonCTRepos;
+        List<HoaDonChiTiet> _lsthdct;
+        IDTRepos _DT;
+        public HoaDonCTService(IHoaDonRepos hoaDonRepos, IDTCTRepos dTCTRepos, IHoaDonCTRepos hoaDonCTRepos, IDTRepos dTRepos)
+        {
+            _HD = hoaDonRepos;
+            _IDTCT = dTCTRepos;
+            _hoaDonCTRepos = hoaDonCTRepos;
+        }
         public bool Add(HoaDonChiTiet obj)
         {
             _hoaDonCTRepos.Add(obj);

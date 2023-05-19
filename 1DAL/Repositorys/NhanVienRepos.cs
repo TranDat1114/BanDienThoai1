@@ -10,7 +10,11 @@ namespace _1DAL.Repositorys
 {
     public class NhanVienRepos : INhanVienRepos
     {
-        DBContextDienThoai _context = new DBContextDienThoai();
+        DBContextDienThoai _context;
+        public NhanVienRepos(DBContextDienThoai dBContextDienThoai)
+        {
+            _context = dBContextDienThoai;
+        }
         public bool Add(NhanVien nhanVien)
         {
             _context.nhanViens.Add(nhanVien);

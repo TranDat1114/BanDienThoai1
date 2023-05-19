@@ -19,9 +19,10 @@ namespace _3PL.View
 {
     public partial class FrmQuenMK : Form
     {
-        INhanVienService _NV = new NhanVienService();
-        public FrmQuenMK()
+        INhanVienService _NV;
+        public FrmQuenMK(INhanVienService nhanVienService )
         {
+            _NV = nhanVienService;
             InitializeComponent();
            
         }

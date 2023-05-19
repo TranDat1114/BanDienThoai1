@@ -12,7 +12,11 @@ namespace _2BUS.Service
 {
     public class MauSacService : IMauSacService
     {
-        IMauSacRepos _mauSac = new MauSacRepos();
+        IMauSacRepos _mauSac;
+        public MauSacService(IMauSacRepos mauSacRepos)
+        {
+            _mauSac = mauSacRepos;
+        }
         public bool Add(MauSac obj)
         {
             _mauSac.Add(obj);

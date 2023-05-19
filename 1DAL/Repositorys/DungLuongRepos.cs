@@ -11,7 +11,11 @@ namespace _1DAL.Repositorys
 {
     public class DungLuongRepos : IDungLuongRepos
     {
-        DBContextDienThoai _context = new DBContextDienThoai();
+        DBContextDienThoai _context;
+       public DungLuongRepos(DBContextDienThoai dBContextDienThoai)
+        {
+             _context = dBContextDienThoai;
+        }
         public bool Add(DungLuong dungLuong)
         {
             _context.dungLuongs.Add(dungLuong);

@@ -13,12 +13,23 @@ namespace _2BUS.Service
 {
     public class DTCTService : IDTCTService
     {
-        IDTCTRepos _iDT = new DTCTRepos();
-        IDTRepos _dienthoai = new DTRepos();
-        IMauSacRepos _mausac = new MauSacRepos();
-        IImeiRepos _imei = new ImeiRepos();
-        IDungLuongRepos _dungluong = new DungLuongRepos();
-        IHSXRepos _HSX = new HSXRepos();
+        IDTCTRepos _iDT;
+        IDTRepos _dienthoai;
+        IMauSacRepos _mausac;
+        IImeiRepos _imei;
+        IDungLuongRepos _dungluong;
+        IHSXRepos _HSX;
+
+        public DTCTService(IDTCTRepos dTCTRepos, IDTRepos dTRepos, IMauSacRepos mauSacRepos, IImeiRepos imeiRepos, IDungLuongRepos dungLuongRepos, IHSXRepos hSXRepos)
+        {
+            _iDT = dTCTRepos;
+            _dienthoai = dTRepos;
+            _imei = imeiRepos;
+            _mausac = mauSacRepos;
+            _dungluong = dungLuongRepos;
+            _HSX = hSXRepos;
+        }
+
         public bool Add(DienThoaiCT obj)
         {
             _iDT.Add(obj);

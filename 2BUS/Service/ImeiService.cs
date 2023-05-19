@@ -12,8 +12,11 @@ namespace _2BUS.Service
 {
     public class IMeiService : IImeiService
     {
-        IImeiRepos _iDT = new ImeiRepos();
-
+        IImeiRepos _iDT;
+        public IMeiService(IImeiRepos imeiRepos)
+        {
+            _iDT = imeiRepos;
+        }
         public bool Add(Imei obj)
         {
             _iDT.Add(obj);

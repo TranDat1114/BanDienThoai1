@@ -15,10 +15,11 @@ namespace _3PL.View
 {
     public partial class FrmDungLuong : Form
     {
-        private IDungLuongService _IDL = new DungLuongService();
+        private IDungLuongService _IDL;
         public DungLuong _DL = new DungLuong();
-        public FrmDungLuong()
+        public FrmDungLuong(IDungLuongService dungLuongService)
         {
+            _IDL = dungLuongService;
             InitializeComponent();
             LoadData();
         }

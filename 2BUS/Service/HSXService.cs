@@ -12,7 +12,8 @@ namespace _2BUS.Service
 {
     public class HSXService : IHSXService
     {
-        IHSXRepos _hSX = new HSXRepos();
+        IHSXRepos _hSX;
+        public HSXService(IHSXRepos hSXRepos) { _hSX = hSXRepos; }
         public bool Add(HangSX obj)
         {
             _hSX.Add(obj);

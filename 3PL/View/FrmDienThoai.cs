@@ -14,10 +14,11 @@ namespace _3PL.View
 {
     public partial class FrmDienThoai : Form
     {
-        private IDTService _DTSV = new DTService();
+        private IDTService _DTSV;
         public DienThoai _DT;
-        public FrmDienThoai()
+        public FrmDienThoai(IDTService dTService)
         {
+            _DTSV = dTService;
             InitializeComponent();
             LoadTodata();
         }

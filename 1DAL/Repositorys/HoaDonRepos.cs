@@ -11,8 +11,11 @@ namespace _1DAL.Repositorys
 {
     public class HoaDonRepos : IHoaDonRepos
     {
-        DBContextDienThoai _dbcontext = new DBContextDienThoai();
-
+        private DBContextDienThoai _dbcontext;
+        public HoaDonRepos(DBContextDienThoai dBContextDienThoai)
+        {
+            _dbcontext = dBContextDienThoai;
+        }
         public bool Add(HoaDon hoaDon)
         {
             _dbcontext.hoaDons.Add(hoaDon);

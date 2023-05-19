@@ -18,16 +18,17 @@ namespace _3PL.View
 {
     public partial class FrmBanHang : Form
     {
-        IDTCTService _IDTCTService = new DTCTService();
-        IDTService _IDTService = new DTService();
-        IDungLuongService _IDLService = new DungLuongService();
-        IHSXService _IHSXService = new HSXService();
-        IImeiService _IImeiService = new IMeiService();
-        IKhachHangService _IKHService = new KhachHangService();
-        IMauSacService _IMSService = new MauSacService();
-        IHoaDonService _IHoaDonService = new HoaDonService();
-        INhanVienService _INVService = new NhanVienService();   
-        IHoaDonCTService_ _IHDCTService = new HoaDonCTService();
+
+        IDTCTService _IDTCTService;
+        IDTService _IDTService;
+        IDungLuongService _IDLService;
+        IHSXService _IHSXService;
+        IImeiService _IImeiService;
+        IKhachHangService _IKHService;
+        IMauSacService _IMSService;
+        IHoaDonService _IHoaDonService;
+        INhanVienService _INVService;
+        IHoaDonCTService_ _IHDCTService;
         public List<HoaDonChiTietView> _lstHoaDon = new List<HoaDonChiTietView>();
         DienThoai _DT = new DienThoai();
         public int spID;
@@ -38,20 +39,30 @@ namespace _3PL.View
         string linkavata = "";
         private FilterInfoCollection filterInfoCollection;
         private VideoCaptureDevice videoCaptureDevice;
-        public FrmBanHang()
+        public FrmBanHang(IDTCTService dTCTService, IDTService dTService, IDungLuongService dungLuongService, IHSXService hSXService, IImeiService imeiService, IKhachHangService khachHangService, IMauSacService mauSacService, IHoaDonService hoaDonService, INhanVienService nhanVienService, IHoaDonCTService_ hoaDonCTService_)
         {
+            _IDTCTService = dTCTService;
+            _IDTService = dTService;
+            _IDLService = dungLuongService;
+            _IHSXService = hSXService;
+            _IImeiService = imeiService;
+            _IKHService = khachHangService;
+            _IMSService = mauSacService;
+            _IHoaDonService = hoaDonService;
+            _INVService = nhanVienService;
+            _IHDCTService = hoaDonCTService_;
             InitializeComponent();
             LoadSP();
             LoadGioHang();
             LoadHoaDon();
-            
+
         }
         public void LoadSP()
         {
-           
+
             dtg_listsp.ColumnCount = 10;
             dtg_listsp.Columns[0].Name = "MaDTCT";
-            dtg_listsp.Columns[0].Visible = false; 
+            dtg_listsp.Columns[0].Visible = false;
             dtg_listsp.Columns[1].Name = "Imei SP";
             dtg_listsp.Columns[2].Name = "Tên SP";
             dtg_listsp.Columns[3].Name = "Hãng SP";
@@ -64,7 +75,7 @@ namespace _3PL.View
             dtg_listsp.Columns[9].Visible = false;
             dtg_listsp.Rows.Clear();
             var showall = _IDTCTService.GetAllDTCT();
-          
+
 
             if (tb_timkiem.Text != "")
             {
@@ -78,14 +89,14 @@ namespace _3PL.View
         public void LoadGioHang()
         {
             dtg_giohang.ColumnCount = 4;
-            dtg_giohang.Columns[0].Name = "MaDTCT";  
+            dtg_giohang.Columns[0].Name = "MaDTCT";
             dtg_giohang.Columns[1].Name = "Tên SP";
             dtg_giohang.Columns[2].Name = "Số Lượng SP";
             dtg_giohang.Columns[3].Name = "Đơn Giá";
             dtg_giohang.Rows.Clear();
             foreach (var item in _lstHoaDon)
             {
-                dtg_giohang.Rows.Add(item.Id, item.tendienthoai,item.Soluong, item.DonGia);
+                dtg_giohang.Rows.Add(item.Id, item.tendienthoai, item.Soluong, item.DonGia);
             }
             TONGTIEN();
         }
@@ -115,11 +126,11 @@ namespace _3PL.View
             dtg_hoadoncho.Columns[3].Visible = false;
             dtg_hoadoncho.Rows.Clear();
             var hd = _IHoaDonService.GetAllView().Where(p => p.hoaDon.TrangThai == 0).ToList();
-            foreach(var item in hd)
+            foreach (var item in hd)
             {
                 dtg_hoadoncho.Rows.Add(item.hoaDon.MaHD, item.khachHang.TenKH, item.hoaDon.TrangThai == 0 ? "Chưa thanh toán" : "Đã thanh toán");
             }
-            
+
         }
 
         private void tb_timkiem_TextChanged(object sender, EventArgs e)
@@ -153,7 +164,7 @@ namespace _3PL.View
             }
             else
             {
-                if(data.Soluong == sp.dienThoaiCT.SoLuong)
+                if (data.Soluong == sp.dienThoaiCT.SoLuong)
                 {
                     MessageBox.Show("Sản phẩm trong giỏ đã vượt quá số lượng tồn");
                 }
@@ -163,7 +174,7 @@ namespace _3PL.View
                 }
             }
             LoadGioHang();
-           
+
         }
 
         private void dtg_giohang_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -238,12 +249,12 @@ namespace _3PL.View
         {
             if (int.TryParse(tb_mahd.Text, out int m))
             {
-                HoaDon o = _IHoaDonService.GetAll().FirstOrDefault(x => x.MaHD == Convert.ToInt32(tb_mahd.Text) && x.TrangThai ==0);
-                
+                HoaDon o = _IHoaDonService.GetAll().FirstOrDefault(x => x.MaHD == Convert.ToInt32(tb_mahd.Text) && x.TrangThai == 0);
+
                 if (o != null)
                 {
 
-                    var a = _IHDCTService.GetAll().FirstOrDefault(p=>p.MaHD==spID);
+                    var a = _IHDCTService.GetAll().FirstOrDefault(p => p.MaHD == spID);
                     lb_tongtien.Text = Convert.ToString(a.SoLuong * a.DonGia);
                     tb_tienkhachdua.Text = "";
                     var khach = _IKHService.GetAll().FirstOrDefault(x => x.SDT == o.SDTKH);
@@ -255,7 +266,7 @@ namespace _3PL.View
                     lb_tongtien.Text = "";
                     lb_tong.Text = "";
                     tbt_giamGia.Text = "";
-                   
+
                     tb_tienkhachdua.Text = "";
                 }
 
@@ -295,20 +306,20 @@ namespace _3PL.View
 
         private void btn_hoadon_Click(object sender, EventArgs e)
         {
-            
-                if (_lstHoaDon.Any())
+
+            if (_lstHoaDon.Any())
+            {
+                int Tong = 0;
+                foreach (var item in _lstHoaDon)
                 {
-                    int Tong = 0;
-                    foreach (var item in _lstHoaDon)
-                    {
-                        Tong += item.DonGia * item.Soluong;
-                    }
-                    _KH = _IKHService.GetAll().FirstOrDefault(x => x.SDT == tb_sdtkh.Text);
-                 
-                    var KHH = _IKHService.GetAll().FirstOrDefault(x => x.SDT == "0");
+                    Tong += item.DonGia * item.Soluong;
+                }
+                _KH = _IKHService.GetAll().FirstOrDefault(x => x.SDT == tb_sdtkh.Text);
+
+                var KHH = _IKHService.GetAll().FirstOrDefault(x => x.SDT == "0");
                 int IDNV = _INVService.GetAllView().FirstOrDefault(x => x.nhanVien.SDT == Properties.Settings.Default.tk).nhanVien.MaNV;
                 if (_KH != null)
-                    {
+                {
                     HoaDon HD = new HoaDon()
                     {
                         MaNV = IDNV,
@@ -319,37 +330,37 @@ namespace _3PL.View
                         NgayBan = DateTime.Now,
                         Ghichu = tbt_ghiChu.Text,
                     };
-                        _IHoaDonService.Add(HD);
-                        foreach (var item in _lstHoaDon)
-                        {
-                            HoaDonChiTiet od = new HoaDonChiTiet()
-                            {
-                                MaHD = HD.MaHD,
-                                MaDTCT = item.Id,
-                                DonGia = item.DonGia,
-                                SoLuong = item.Soluong
-
-                            };
-                            _IHDCTService.Add(od);
-                            var p = _IDTCTService.GetAll().FirstOrDefault(x => x.MaDTCT == item.Id);
-
-                            p.SoLuong -= item.Soluong;
-                            _IDTCTService.Update(p);
-
-                        }
-                        MessageBox.Show($"Tạo hóa đơn thành công. ID: {HD.MaHD}");
-                        LoadHoaDon();
-                        _lstHoaDon = new List<HoaDonChiTietView>();
-                    }
-                    else
+                    _IHoaDonService.Add(HD);
+                    foreach (var item in _lstHoaDon)
                     {
-                        MessageBox.Show("Vui lòng nhập khách hàng");
+                        HoaDonChiTiet od = new HoaDonChiTiet()
+                        {
+                            MaHD = HD.MaHD,
+                            MaDTCT = item.Id,
+                            DonGia = item.DonGia,
+                            SoLuong = item.Soluong
+
+                        };
+                        _IHDCTService.Add(od);
+                        var p = _IDTCTService.GetAll().FirstOrDefault(x => x.MaDTCT == item.Id);
+
+                        p.SoLuong -= item.Soluong;
+                        _IDTCTService.Update(p);
+
                     }
+                    MessageBox.Show($"Tạo hóa đơn thành công. ID: {HD.MaHD}");
+                    LoadHoaDon();
+                    _lstHoaDon = new List<HoaDonChiTietView>();
                 }
                 else
                 {
-                    MessageBox.Show("Chưa có sản phẩm nào trong giỏ hàng");
+                    MessageBox.Show("Vui lòng nhập khách hàng");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Chưa có sản phẩm nào trong giỏ hàng");
+            }
         }
 
         private void tb_sdtkh_TextChanged(object sender, EventArgs e)
@@ -398,7 +409,7 @@ namespace _3PL.View
                             _IHDCTService.Delete(item);
                         }
 
-                        
+
                         foreach (var item in _lstHoaDon)
                         {
                             HoaDonChiTiet hoadonct = new HoaDonChiTiet()
@@ -414,7 +425,7 @@ namespace _3PL.View
                             SP.SoLuong -= item.Soluong;
                             _IDTCTService.Update(SP);
                         }
-                        
+
                         HD.NgayBan = DateTime.Now;
                         HD.SDTKH = _KH.SDT;
                         HD.MaKH = _KH.MaKH;
@@ -451,7 +462,7 @@ namespace _3PL.View
         private void tb_tienkhachdua_TextChanged(object sender, EventArgs e)
         {
             LoadTienThua();
-            
+
         }
 
         private void dtg_hoadoncho_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -471,7 +482,7 @@ namespace _3PL.View
                 foreach (var item in HDCT)
                 {
                     var SP = _IDTCTService.GetAllDTCT().FirstOrDefault(x => x.dienThoaiCT.MaDTCT == item.MaDTCT);
-                
+
                     HoaDonChiTietView ViewHDCT = new HoaDonChiTietView()
                     {
                         Id = SP.dienThoaiCT.MaDTCT,
@@ -539,7 +550,7 @@ namespace _3PL.View
                 {
                     MessageBox.Show("Vui lòng nhập đúng số tiền");
                 }
-               
+
                 else if (tb_sdtkh.Text == "0")
                 {
                     DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn thanh toán không?", "Thanh toán", MessageBoxButtons.YesNo);
@@ -567,7 +578,7 @@ namespace _3PL.View
                         LoadGioHang();
                         LoadHoaDon();
                         LoadSP();
-                        
+
                     }
                 }
                 else
@@ -609,7 +620,7 @@ namespace _3PL.View
                         LoadGioHang();
                         LoadHoaDon();
                         LoadSP();
-                       
+
                     }
                 }
             }
@@ -636,7 +647,7 @@ namespace _3PL.View
                 Result result = barcodeReader.Decode((Bitmap)ptb_quetma.Image);
                 if (result != null)
                 {
-                   
+
                     tb_timkiem.Text = result.ToString();
                 }
             }

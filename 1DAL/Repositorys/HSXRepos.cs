@@ -11,7 +11,11 @@ namespace _1DAL.Repositorys
 {
     public class HSXRepos : IHSXRepos
     {
-        DBContextDienThoai _context = new DBContextDienThoai();
+        private DBContextDienThoai _context;
+        public HSXRepos(DBContextDienThoai dBContextDienThoai)
+        {
+            _context = dBContextDienThoai;
+        }
         public bool Add(HangSX hangSX)
         {
             _context.hangSXs.Add(hangSX);

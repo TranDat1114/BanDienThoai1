@@ -10,7 +10,11 @@ namespace _1DAL.Repositorys
 {
     public class ChucVuRepos : IChucVuRepos
     {
-        DBContextDienThoai _dbcontext = new DBContextDienThoai();
+        private DBContextDienThoai _dbcontext;
+        public ChucVuRepos(DBContextDienThoai dBContextDienThoai)
+        {
+            _dbcontext = dBContextDienThoai;
+        }
         public bool Add(ChucVu chucVu)
         {
             _dbcontext.chucVus.Add(chucVu);

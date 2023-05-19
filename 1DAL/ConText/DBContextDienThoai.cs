@@ -11,12 +11,17 @@ namespace _1DAL.ConText
 {
     public class DBContextDienThoai : DbContext
     {
-        public DBContextDienThoai()
-        {
-        }
+        public DBContextDienThoai() { }
+  
         public DBContextDienThoai(DbContextOptions options) : base(options)
         {
+           
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("server=tranhoang\\moonserver; database=DuAnDT;Integrated Security=True");
+        }
+
         public DbSet<Imei> Imeis { get; set; }
         public DbSet<ChucVu> chucVus { get; set; }
         public DbSet<HangSX> hangSXs { get; set; }
@@ -30,11 +35,7 @@ namespace _1DAL.ConText
        
         public DbSet<KhachHang> khachHangs { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            
-        }
-
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ChucVuConfiguration());

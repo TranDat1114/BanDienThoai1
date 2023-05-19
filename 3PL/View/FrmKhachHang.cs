@@ -15,10 +15,11 @@ namespace _3PL.View
 {
     public partial class FrmKhachHang : Form
     {
-        IKhachHangService _KHSV = new   KhachHangService();
+        IKhachHangService _KHSV ;
         KhachHang _KH = new KhachHang();
-        public FrmKhachHang()
+        public FrmKhachHang(IKhachHangService khachHangService)
         {
+            _KHSV = khachHangService;
             InitializeComponent();
             Loadtodata();
         }

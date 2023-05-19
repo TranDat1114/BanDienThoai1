@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace _1DAL.Migrations
 {
-    public partial class test : Migration
+    public partial class demo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -317,12 +317,12 @@ namespace _1DAL.Migrations
             migrationBuilder.InsertData(
                 table: "NhanVien",
                 columns: new[] { "MaNV", "DiaChi", "GioiTinh", "MaCV", "NgaySinh", "SDT", "TenNV", "TrangThai", "matKhau" },
-                values: new object[] { 1, "Hà Nam", 1, 1, new DateTime(2023, 5, 15, 13, 30, 43, 484, DateTimeKind.Local).AddTicks(5560), "0336253482", "Ngô Quốc Mạnh", 0, "123" });
+                values: new object[] { 1, "Hà Nam", 1, 1, new DateTime(2023, 5, 18, 1, 32, 34, 285, DateTimeKind.Local).AddTicks(5058), "0336253482", "Ngô Quốc Mạnh", 0, "123" });
 
             migrationBuilder.InsertData(
                 table: "NhanVien",
                 columns: new[] { "MaNV", "DiaChi", "GioiTinh", "MaCV", "NgaySinh", "SDT", "TenNV", "TrangThai", "matKhau" },
-                values: new object[] { 2, "Tuyên Quang", 1, 2, new DateTime(2023, 5, 15, 13, 30, 43, 484, DateTimeKind.Local).AddTicks(5551), "0379702133", "Nguyễn Văn Đạo", 0, "123" });
+                values: new object[] { 2, "Tuyên Quang", 1, 2, new DateTime(2023, 5, 18, 1, 32, 34, 285, DateTimeKind.Local).AddTicks(5047), "0379702133", "Nguyễn Văn Đạo", 0, "123" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_DienThoaiCT_MaDT",

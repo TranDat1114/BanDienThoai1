@@ -12,11 +12,22 @@ namespace _3PL.View
 {
     public partial class FrmQuanLySP : Form
     {
-        public FrmQuanLySP()
+        FrmDienThoaiCT frmDienThoaiCT;
+        FrmDienThoai dt;
+        FrmImei im;
+        FrmHSX hsx;
+        FrmDungLuong dl;
+        FrmMauSac ms;
+        public FrmQuanLySP(FrmDienThoaiCT frmDienThoai, FrmDienThoai frmDienThoai1, FrmImei frmImei, FrmHSX hsx, FrmDungLuong frmDungLuong, FrmMauSac frmMauSac)
         {
             InitializeComponent();
-            FrmDienThoaiCT frmChiTietSP = new FrmDienThoaiCT();
-            ChangeForm(frmChiTietSP);
+            dt = frmDienThoai1;
+            im = frmImei;
+            this.frmDienThoaiCT = frmDienThoai;
+            ChangeForm(this.frmDienThoaiCT);
+            this.hsx = hsx;
+            this.dl = frmDungLuong;
+            this.ms = frmMauSac;
         }
         private Form activeForm;
         private void menuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -38,8 +49,7 @@ namespace _3PL.View
         }
         private void điệnThoạiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmDienThoaiCT dtct = new FrmDienThoaiCT();
-            ChangeForm(dtct);
+            ChangeForm(frmDienThoaiCT);
         }
 
         private void pn_QLSP_Load(object sender, EventArgs e)
@@ -49,31 +59,28 @@ namespace _3PL.View
 
         private void điệnThoạiChiTiếtToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmDienThoai dt = new FrmDienThoai();
             ChangeForm(dt);
         }
 
         private void imeiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmImei im = new FrmImei();
             ChangeForm(im);
         }
-
+        //vailoz???
         private void hãngSXToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmHSX hsx = new FrmHSX();
+          
             ChangeForm(hsx);
         }
 
         private void dungLượngToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmDungLuong dl = new FrmDungLuong();
+            
             ChangeForm(dl);
         }
 
         private void màuSắcToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmMauSac ms = new FrmMauSac();
             ChangeForm(ms);
         }
 

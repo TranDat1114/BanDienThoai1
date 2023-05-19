@@ -15,10 +15,11 @@ namespace _3PL.View
 {
     public partial class FrmHSX : Form
     {
-        private IHSXService _IHSX = new HSXService();
+        private IHSXService _IHSX ;
         public HangSX _HSX = new HangSX();
-        public FrmHSX()
+        public FrmHSX(IHSXService hSXService)
         {
+            _IHSX = hSXService;
             InitializeComponent();
             LoadData();
         }

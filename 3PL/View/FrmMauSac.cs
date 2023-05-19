@@ -14,10 +14,11 @@ namespace _3PL.View
 {
     public partial class FrmMauSac : Form
     {
-        private IMauSacService _MSSV = new MauSacService();
+        private IMauSacService _MSSV;
         public MauSac _MS;
-        public FrmMauSac()
-        { 
+        public FrmMauSac(IMauSacService mauSacService)
+        {
+            _MSSV = mauSacService;
             InitializeComponent();
             LoadToData();
         }

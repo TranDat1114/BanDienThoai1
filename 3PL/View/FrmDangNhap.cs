@@ -1,5 +1,6 @@
 ﻿using _2BUS.IService;
 using _2BUS.Service;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +16,16 @@ namespace _3PL.View
     public partial class FrmDangNhap : Form
     {
         IKhachHangService _khachhang;
-        INhanVienService _nhanvien ;
-        INhanVienService inhanvienservice;
-        public FrmDangNhap(IKhachHangService khachHangService, INhanVienService nhanVienService)
+        INhanVienService _nhanvien;
+        //INhanVienService inhanvienservice;
+        private FrmMain _FrmMain;
+        private FrmQuenMK quenMK;
+        public FrmDangNhap(IKhachHangService khachHangService, INhanVienService nhanVienService, FrmMain frmMain, FrmQuenMK quenMK)
         {
             _khachhang = khachHangService;
             _nhanvien = nhanVienService;
+            _FrmMain = frmMain;
+            this.quenMK = quenMK;
         }
         public FrmDangNhap()
         {
@@ -32,7 +37,7 @@ namespace _3PL.View
             {
                 cbNhoMK.Checked = true;
             }
-           
+
         }
         public void saveInfor()
         {
@@ -69,17 +74,16 @@ namespace _3PL.View
                 {
                     if (login.TrangThai == 1)
                     {
-                        MessageBox.Show("Nhân viên đã nghỉ việc không thể đăng nhập bằng tài khoản này","Chú ý");
+                        MessageBox.Show("Nhân viên đã nghỉ việc không thể đăng nhập bằng tài khoản này", "Chú ý");
                     }
                     else
                     {
                         saveInfor();
                         this.Hide();
-                        FrmMain frmMain = new FrmMain();
-                        frmMain.ShowDialog();
+                        _FrmMain.ShowDialog();
                         this.Close();
                     }
-                    
+
                 }
                 else
                 {
@@ -90,20 +94,19 @@ namespace _3PL.View
 
         private void cbNhoMK_CheckedChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
-            FrmQuenMK quenMK = new FrmQuenMK();
             quenMK.ShowDialog();
         }
 
         private void txtTK_TextChanged(object sender, EventArgs e)
         {
-           
-          
-           
+
+
+
 
         }
 

@@ -12,7 +12,12 @@ namespace _1DAL.Repositorys
 {
     public class MauSacRepos : IMauSacRepos
     {
-        DBContextDienThoai _context = new DBContextDienThoai();
+        DBContextDienThoai _context;
+        public MauSacRepos(DBContextDienThoai context)
+        {
+            _context = context;
+        }
+
         public bool Add(MauSac mauSac)
         {
             _context.mauSacs.Add(mauSac);

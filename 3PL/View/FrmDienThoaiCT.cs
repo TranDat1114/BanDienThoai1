@@ -21,16 +21,23 @@ namespace _3PL.View
         private FilterInfoCollection filterInfoCollection;
         private VideoCaptureDevice videoCaptureDevice;
         DienThoaiCT _DTCT = new DienThoaiCT();
-        IDTCTService _DTCTService = new DTCTService();
-        IDTService _DTService = new DTService();
-        IMauSacService _MauSacService = new MauSacService();
-        IImeiService _ImeiService = new IMeiService();
-        IDungLuongService _DungLuongService = new DungLuongService();
-        IHSXService _HSXService = new HSXService();
-        public FrmDienThoaiCT()
+        IDTCTService _DTCTService;
+        IDTService _DTService;
+        IMauSacService _MauSacService;
+        IImeiService _ImeiService;
+        IDungLuongService _DungLuongService;
+        IHSXService _HSXService;
+        public FrmDienThoaiCT(IDTCTService dTCTService, IDTService dTService, IMauSacService mauSacService, IImeiService imeiService, IDungLuongService dungLuongService, IHSXService hSXService)
         {
+            _DTCTService = dTCTService;
+            _DTService = dTService;
+            _MauSacService = mauSacService;
+            _ImeiService = imeiService;
+            _DungLuongService = dungLuongService;
+            _HSXService = hSXService;
+
             InitializeComponent();
-            var dt = _DTService.GetAll().Where(p => p.TrangThai ==1);
+            var dt = _DTService.GetAll().Where(p => p.TrangThai == 1);
             var ms = _MauSacService.GetAll().Where(p => p.TrangThai == 1);
             var imei = _ImeiService.GetAll().Where(p => p.TrangThai == true);
             var dungluong = _DungLuongService.GetAll().Where(p => p.TrangThai == 1);
@@ -39,10 +46,10 @@ namespace _3PL.View
             {
                 cbb_dienthoai.Items.Add(item.TenDT);
             }
-            
+
             foreach (var item in ms)
             {
-                
+
                 cbb_mausac.Items.Add(item.TenMau);
             }
             foreach (var item in imei)
@@ -86,7 +93,7 @@ namespace _3PL.View
             }
             foreach (var item in showall)
             {
-                dtg_show.Rows.Add(item.dienThoaiCT.MaQR, item.imei.TenImei, item.dienThoai.TenDT, item.hangSX.TenHang, item.mauSac.TenMau, item.dungLuong.SoDungLuong, item.dienThoaiCT.SoLuong, item.dienThoaiCT.GiaNhap, item.dienThoaiCT.GiaBan, item.dienThoaiCT.LinkAnh, item.dienThoaiCT.MaDTCT, item.dienThoaiCT.TrangThai == true?"Còn hàng" :"Hết hàng");
+                dtg_show.Rows.Add(item.dienThoaiCT.MaQR, item.imei.TenImei, item.dienThoai.TenDT, item.hangSX.TenHang, item.mauSac.TenMau, item.dungLuong.SoDungLuong, item.dienThoaiCT.SoLuong, item.dienThoaiCT.GiaNhap, item.dienThoaiCT.GiaBan, item.dienThoaiCT.LinkAnh, item.dienThoaiCT.MaDTCT, item.dienThoaiCT.TrangThai == true ? "Còn hàng" : "Hết hàng");
             }
         }
 
@@ -117,7 +124,7 @@ namespace _3PL.View
                 {
                     pcb_anhSP.Image = null;
                 }
-                
+
 
             }
         }
@@ -147,7 +154,7 @@ namespace _3PL.View
         }
         public bool Checkdodaichu()
         {
-            if (tb_maQR.TextLength > 50 || tb_soluong.TextLength >15 || tb_giaban.TextLength>20 || tb_gianhap.TextLength >20) return false;
+            if (tb_maQR.TextLength > 50 || tb_soluong.TextLength > 15 || tb_giaban.TextLength > 20 || tb_gianhap.TextLength > 20) return false;
             return true;
         }
 
@@ -162,7 +169,7 @@ namespace _3PL.View
 
         private void btn_them_Click(object sender, EventArgs e)
         {
-            
+
             var dt = _DTService.GetAll().FirstOrDefault(p => p.TenDT == cbb_dienthoai.Text);
             var dtct = _DTCTService.GetAll().FirstOrDefault(p => p.MaQR == tb_maQR.Text);
             var hangsx = _HSXService.GetAll().FirstOrDefault(p => p.TenHang == cbb_hangSX.Text);
@@ -213,7 +220,7 @@ namespace _3PL.View
             {
                 MessageBox.Show("Vui lòng chọn trạng thái");
             }
-           
+
             else
             {
                 DialogResult dialog = MessageBox.Show("Bạn có muốn thêm sản phẩm không", "Chú ý", MessageBoxButtons.YesNo);
@@ -233,7 +240,7 @@ namespace _3PL.View
                         LinkAnh = linkavata,
                         TrangThai = rb_conhang.Checked ? true : false,
                     };
-                   if(rb_hethang.Checked == true)
+                    if (rb_hethang.Checked == true)
                     {
                         add.SoLuong = 0;
                         _DTCTService.Add(add);
@@ -246,15 +253,15 @@ namespace _3PL.View
                         MessageBox.Show("Them san pham thanh cong");
                         Loadtodata();
                     }
-                    
+
                 }
             }
         }
 
-      
+
         private void button1_Click(object sender, EventArgs e)
         {
-            if(button1.Text == "Quét mã")
+            if (button1.Text == "Quét mã")
             {
                 cboDevice.Visible = false;
                 filterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -273,14 +280,14 @@ namespace _3PL.View
             else
             {
                 DialogResult dl = MessageBox.Show("Ban co muon dung quet khong", "Chu y", MessageBoxButtons.YesNo);
-                if(dl == DialogResult.Yes)
+                if (dl == DialogResult.Yes)
                 {
                     videoCaptureDevice.Stop();
                     button1.Text = "Quét mã";
                 }
-                
+
             }
-            
+
         }
 
         private void btn_lamMoi_Click(object sender, EventArgs e)
@@ -336,26 +343,30 @@ namespace _3PL.View
             var mausac = _MauSacService.GetAll().FirstOrDefault(p => p.TenMau == cbb_mausac.Text);
             var dungluong = _DungLuongService.GetAll().FirstOrDefault(p => p.SoDungLuong == cbb_dungluong.Text);
             var imei = _ImeiService.GetAll().FirstOrDefault(p => p.TenImei == cbb_Imei.Text);
-            if(_DTCT == null)
+            if (_DTCT == null)
             {
                 MessageBox.Show("Vui lòng chọn sản phẩm");
             }
             else
             {
                 var sp = _DTCTService.GetAll().FirstOrDefault(p => p.MaQR == tb_maQR.Text);
-                if(Checkvalidate() == false)
+                if (Checkvalidate() == false)
                 {
                     MessageBox.Show("Không được để trống các thông tin");
-                }else if(Checkdodaichu() == false)
+                }
+                else if (Checkdodaichu() == false)
                 {
                     MessageBox.Show("Quá nhiều ký tự trong 1 thông tin");
-                }else if(CheckSo(tb_gianhap.Text)==false || CheckSo(tb_giaban.Text) == false || CheckSo(tb_soluong.Text) == false)
+                }
+                else if (CheckSo(tb_gianhap.Text) == false || CheckSo(tb_giaban.Text) == false || CheckSo(tb_soluong.Text) == false)
                 {
                     MessageBox.Show("Giá và số lượng phải là số");
-                }else if (Convert.ToInt32(tb_gianhap.Text) > Convert.ToInt32(tb_giaban.Text))
+                }
+                else if (Convert.ToInt32(tb_gianhap.Text) > Convert.ToInt32(tb_giaban.Text))
                 {
                     MessageBox.Show("Giá bán phải cao hơn giá nhập");
-                }else if(pcb_anhSP.Image == null)
+                }
+                else if (pcb_anhSP.Image == null)
                 {
                     MessageBox.Show("Bạn chưa thêm ảnh cho sản phẩm");
                 }
@@ -375,16 +386,16 @@ namespace _3PL.View
                 {
                     MessageBox.Show("Điện thoại khong ton tai");
                 }
-                else if( rb_conhang.Checked == false && rb_hethang.Checked == false)
+                else if (rb_conhang.Checked == false && rb_hethang.Checked == false)
                 {
                     MessageBox.Show("Vui lòng chọn trạng thái");
                 }
                 else
                 {
-                    if(_DTCT.MaQR == tb_maQR.Text||(_DTCT.MaQR!=tb_maQR.Text && _DTCTService.GetAll().FirstOrDefault(x=>x.MaQR == tb_maQR.Text) == null))
+                    if (_DTCT.MaQR == tb_maQR.Text || (_DTCT.MaQR != tb_maQR.Text && _DTCTService.GetAll().FirstOrDefault(x => x.MaQR == tb_maQR.Text) == null))
                     {
                         DialogResult dl = MessageBox.Show("Bạn muốn cập nhập sản phẩm không?", "Chú ý", MessageBoxButtons.YesNo);
-                        if(dl == DialogResult.Yes)
+                        if (dl == DialogResult.Yes)
                         {
                             _DTCT.MaQR = tb_maQR.Text;
                             _DTCT.MaDT = _DTService.GetAll().FirstOrDefault(p => p.TenDT == cbb_dienthoai.Text).MaDT;
@@ -397,7 +408,7 @@ namespace _3PL.View
                             _DTCT.GiaNhap = Convert.ToInt32(tb_gianhap.Text);
                             _DTCT.LinkAnh = linkavata;
                             _DTCT.TrangThai = rb_conhang.Checked ? true : false;
-                            if(rb_hethang.Checked == true)
+                            if (rb_hethang.Checked == true)
                             {
                                 _DTCT.SoLuong = 0;
                                 _DTCTService.Update(_DTCT);

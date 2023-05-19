@@ -29,226 +29,206 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmHoaDon));
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dtg_hoadonchitiet = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btn_XoaHD = new System.Windows.Forms.Button();
-            this.btn_timk = new System.Windows.Forms.Button();
-            this.dtg_hoadon = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tbt_timk = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtg_hoadonchitiet)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtg_hoadon)).BeginInit();
-            this.SuspendLayout();
+            groupBox2 = new GroupBox();
+            dtg_hoadonchitiet = new DataGridView();
+            Column8 = new DataGridViewTextBoxColumn();
+            Column9 = new DataGridViewTextBoxColumn();
+            Column10 = new DataGridViewTextBoxColumn();
+            Column11 = new DataGridViewTextBoxColumn();
+            groupBox1 = new GroupBox();
+            btn_XoaHD = new Button();
+            btn_timk = new Button();
+            dtg_hoadon = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column4 = new DataGridViewTextBoxColumn();
+            Column5 = new DataGridViewTextBoxColumn();
+            Column6 = new DataGridViewTextBoxColumn();
+            Column7 = new DataGridViewTextBoxColumn();
+            tbt_timk = new TextBox();
+            label1 = new Label();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dtg_hoadonchitiet).BeginInit();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dtg_hoadon).BeginInit();
+            SuspendLayout();
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dtg_hoadonchitiet);
-            this.groupBox2.Location = new System.Drawing.Point(41, 445);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(1193, 343);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Hóa đơn chi tiết";
+            groupBox2.Controls.Add(dtg_hoadonchitiet);
+            groupBox2.Location = new Point(36, 351);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(1044, 271);
+            groupBox2.TabIndex = 3;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Hóa đơn chi tiết";
             // 
             // dtg_hoadonchitiet
             // 
-            this.dtg_hoadonchitiet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dtg_hoadonchitiet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtg_hoadonchitiet.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column8,
-            this.Column9,
-            this.Column10,
-            this.Column11});
-            this.dtg_hoadonchitiet.Location = new System.Drawing.Point(15, 42);
-            this.dtg_hoadonchitiet.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dtg_hoadonchitiet.Name = "dtg_hoadonchitiet";
-            this.dtg_hoadonchitiet.RowHeadersWidth = 51;
-            this.dtg_hoadonchitiet.RowTemplate.Height = 25;
-            this.dtg_hoadonchitiet.Size = new System.Drawing.Size(613, 294);
-            this.dtg_hoadonchitiet.TabIndex = 4;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btn_XoaHD);
-            this.groupBox1.Controls.Add(this.btn_timk);
-            this.groupBox1.Controls.Add(this.dtg_hoadon);
-            this.groupBox1.Controls.Add(this.tbt_timk);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(41, 6);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(1193, 430);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Hóa đơn";
-            // 
-            // btn_XoaHD
-            // 
-            this.btn_XoaHD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btn_XoaHD.Image = ((System.Drawing.Image)(resources.GetObject("btn_XoaHD.Image")));
-            this.btn_XoaHD.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_XoaHD.Location = new System.Drawing.Point(1017, 33);
-            this.btn_XoaHD.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btn_XoaHD.Name = "btn_XoaHD";
-            this.btn_XoaHD.Size = new System.Drawing.Size(170, 54);
-            this.btn_XoaHD.TabIndex = 15;
-            this.btn_XoaHD.Text = "Xóa hoá đơn";
-            this.btn_XoaHD.UseVisualStyleBackColor = false;
-            this.btn_XoaHD.Click += new System.EventHandler(this.btn_XoaHD_Click);
-            // 
-            // btn_timk
-            // 
-            this.btn_timk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btn_timk.Image = ((System.Drawing.Image)(resources.GetObject("btn_timk.Image")));
-            this.btn_timk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_timk.Location = new System.Drawing.Point(387, 33);
-            this.btn_timk.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btn_timk.Name = "btn_timk";
-            this.btn_timk.Size = new System.Drawing.Size(97, 29);
-            this.btn_timk.TabIndex = 3;
-            this.btn_timk.Text = "Tìm kiếm";
-            this.btn_timk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_timk.UseVisualStyleBackColor = false;
-            this.btn_timk.Click += new System.EventHandler(this.btn_timk_Click);
-            // 
-            // dtg_hoadon
-            // 
-            this.dtg_hoadon.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dtg_hoadon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtg_hoadon.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6,
-            this.Column7});
-            this.dtg_hoadon.Location = new System.Drawing.Point(8, 108);
-            this.dtg_hoadon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dtg_hoadon.Name = "dtg_hoadon";
-            this.dtg_hoadon.RowHeadersWidth = 51;
-            this.dtg_hoadon.RowTemplate.Height = 25;
-            this.dtg_hoadon.Size = new System.Drawing.Size(1179, 314);
-            this.dtg_hoadon.TabIndex = 2;
-            this.dtg_hoadon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_hoadon_CellClick);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Mã Hóa Đơn";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Ngày Tạo";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Tên Nhân Viên";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Số Điện Thoại Khách Hàng";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Tổng Giá";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Trạng Thái";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "Ghi Chú";
-            this.Column7.MinimumWidth = 6;
-            this.Column7.Name = "Column7";
-            // 
-            // tbt_timk
-            // 
-            this.tbt_timk.Location = new System.Drawing.Point(154, 33);
-            this.tbt_timk.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tbt_timk.Name = "tbt_timk";
-            this.tbt_timk.Size = new System.Drawing.Size(217, 26);
-            this.tbt_timk.TabIndex = 1;
-            this.tbt_timk.TextChanged += new System.EventHandler(this.tbt_timk_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(14, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tìm kiếm hóa đơn";
+            dtg_hoadonchitiet.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dtg_hoadonchitiet.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtg_hoadonchitiet.Columns.AddRange(new DataGridViewColumn[] { Column8, Column9, Column10, Column11 });
+            dtg_hoadonchitiet.Location = new Point(13, 33);
+            dtg_hoadonchitiet.Name = "dtg_hoadonchitiet";
+            dtg_hoadonchitiet.RowHeadersWidth = 51;
+            dtg_hoadonchitiet.RowTemplate.Height = 25;
+            dtg_hoadonchitiet.Size = new Size(536, 232);
+            dtg_hoadonchitiet.TabIndex = 4;
             // 
             // Column8
             // 
-            this.Column8.HeaderText = "Mã Sản Phẩm";
-            this.Column8.Name = "Column8";
+            Column8.HeaderText = "Mã Sản Phẩm";
+            Column8.Name = "Column8";
             // 
             // Column9
             // 
-            this.Column9.HeaderText = "Mã QR Sản Phẩm";
-            this.Column9.Name = "Column9";
+            Column9.HeaderText = "Mã QR Sản Phẩm";
+            Column9.Name = "Column9";
             // 
             // Column10
             // 
-            this.Column10.HeaderText = "Số Lượng";
-            this.Column10.MinimumWidth = 6;
-            this.Column10.Name = "Column10";
+            Column10.HeaderText = "Số Lượng";
+            Column10.MinimumWidth = 6;
+            Column10.Name = "Column10";
             // 
             // Column11
             // 
-            this.Column11.HeaderText = "Đơn Giá";
-            this.Column11.MinimumWidth = 6;
-            this.Column11.Name = "Column11";
+            Column11.HeaderText = "Đơn Giá";
+            Column11.MinimumWidth = 6;
+            Column11.Name = "Column11";
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(btn_XoaHD);
+            groupBox1.Controls.Add(btn_timk);
+            groupBox1.Controls.Add(dtg_hoadon);
+            groupBox1.Controls.Add(tbt_timk);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Location = new Point(36, 5);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(1044, 339);
+            groupBox1.TabIndex = 2;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Hóa đơn";
+            // 
+            // btn_XoaHD
+            // 
+            btn_XoaHD.BackColor = Color.FromArgb(128, 255, 255);
+            btn_XoaHD.Image = (Image)resources.GetObject("btn_XoaHD.Image");
+            btn_XoaHD.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_XoaHD.Location = new Point(890, 26);
+            btn_XoaHD.Name = "btn_XoaHD";
+            btn_XoaHD.Size = new Size(149, 43);
+            btn_XoaHD.TabIndex = 15;
+            btn_XoaHD.Text = "Xóa hoá đơn";
+            btn_XoaHD.UseVisualStyleBackColor = false;
+            btn_XoaHD.Click += btn_XoaHD_Click;
+            // 
+            // btn_timk
+            // 
+            btn_timk.BackColor = Color.FromArgb(128, 255, 255);
+            btn_timk.Image = (Image)resources.GetObject("btn_timk.Image");
+            btn_timk.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_timk.Location = new Point(339, 26);
+            btn_timk.Name = "btn_timk";
+            btn_timk.Size = new Size(85, 23);
+            btn_timk.TabIndex = 3;
+            btn_timk.Text = "Tìm kiếm";
+            btn_timk.TextAlign = ContentAlignment.MiddleRight;
+            btn_timk.UseVisualStyleBackColor = false;
+            btn_timk.Click += btn_timk_Click;
+            // 
+            // dtg_hoadon
+            // 
+            dtg_hoadon.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dtg_hoadon.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtg_hoadon.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7 });
+            dtg_hoadon.Location = new Point(7, 85);
+            dtg_hoadon.Name = "dtg_hoadon";
+            dtg_hoadon.RowHeadersWidth = 51;
+            dtg_hoadon.RowTemplate.Height = 25;
+            dtg_hoadon.Size = new Size(1032, 248);
+            dtg_hoadon.TabIndex = 2;
+            dtg_hoadon.CellClick += dtg_hoadon_CellClick;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Mã Hóa Đơn";
+            Column1.MinimumWidth = 6;
+            Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Ngày Tạo";
+            Column2.MinimumWidth = 6;
+            Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "Tên Nhân Viên";
+            Column3.MinimumWidth = 6;
+            Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            Column4.HeaderText = "Số Điện Thoại Khách Hàng";
+            Column4.MinimumWidth = 6;
+            Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            Column5.HeaderText = "Tổng Giá";
+            Column5.MinimumWidth = 6;
+            Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            Column6.HeaderText = "Trạng Thái";
+            Column6.MinimumWidth = 6;
+            Column6.Name = "Column6";
+            // 
+            // Column7
+            // 
+            Column7.HeaderText = "Ghi Chú";
+            Column7.MinimumWidth = 6;
+            Column7.Name = "Column7";
+            // 
+            // tbt_timk
+            // 
+            tbt_timk.Location = new Point(135, 26);
+            tbt_timk.Name = "tbt_timk";
+            tbt_timk.Size = new Size(190, 23);
+            tbt_timk.TabIndex = 1;
+            tbt_timk.TextChanged += tbt_timk_TextChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(12, 31);
+            label1.Name = "label1";
+            label1.Size = new Size(108, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Tìm kiếm hóa đơn";
             // 
             // FrmHoaDon
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.ClientSize = new System.Drawing.Size(1275, 794);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Name = "FrmHoaDon";
-            this.Text = "FrmHoaDon";
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dtg_hoadonchitiet)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtg_hoadon)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(255, 192, 128);
+            ClientSize = new Size(1116, 627);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "FrmHoaDon";
+            Text = "FrmHoaDon";
+            groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dtg_hoadonchitiet).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dtg_hoadon).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

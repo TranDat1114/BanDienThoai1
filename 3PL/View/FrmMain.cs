@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using _2BUS.IService;
 using _2BUS.Service;
 namespace _3PL.View
@@ -15,11 +16,23 @@ namespace _3PL.View
     {
         IChucVuService _chucVuService;
         INhanVienService _nhanVienService;
-        public FrmMain(INhanVienService nhanVienService)
+        FrmNhanVien frmNhanVien;
+        FrmHoaDon frmHoaDon;
+        FrmBanHang frmBanHang;
+        FrmQuanLySP _frmQuanLySP;
+        FrmKhachHang frmKhachHang;
+        FrmThongKe frmThongKe;
+        public FrmMain(INhanVienService nhanVienService, IChucVuService chucVuService, FrmNhanVien frmNhanVien, FrmBanHang frmBanHang, FrmKhachHang frmKhachHang, FrmQuanLySP frmQuanLySP, FrmHoaDon frmHoaDon, FrmThongKe frmThongKe)
         {
-            InitializeComponent();
-            _chucVuService = new ChucVuService();
+            _chucVuService = chucVuService;
             _nhanVienService = nhanVienService;
+            this.frmNhanVien = frmNhanVien;
+            this.frmBanHang = frmBanHang;
+            this.frmHoaDon = frmHoaDon;
+            this.frmKhachHang = frmKhachHang;
+            this._frmQuanLySP = frmQuanLySP;
+            this.frmThongKe = frmThongKe;
+            InitializeComponent();
             this.CenterToScreen();
             GoFullscreen(AutoSize);
         }
@@ -27,7 +40,7 @@ namespace _3PL.View
         private void FrmMain_Load(object sender, EventArgs e)
         {
             var layEmail = Properties.Settings.Default.TKdaLogin;
-            var nhanvien = _nhanVienService.GetAll().FirstOrDefault(p => p.SDT == layEmail);
+            var nhanvien = _nhanVienService.GetAll().FirstOrDefault(p => p.MaNV == 1);
             var nhanvien1 = _nhanVienService.GetAll().FirstOrDefault(p => p.SDT == Properties.Settings.Default.TKdaLogin);
             lb_maNV.Text = nhanvien.MaNV.ToString();
             labe_ten.Text = nhanvien.TenNV;
@@ -44,17 +57,17 @@ namespace _3PL.View
         private Form activeForm;
         public void ChangeForm(Form form)
         {
-            if (activeForm != null)
+            //Thêm logic tính chỉ đóng form đó khi đang không mở
+            if (activeForm != null && activeForm.Name != form.Name )
             {
-
-                activeForm.Close();
+                activeForm.Hide();
             }
             activeForm = form;
             form.TopLevel = false;
             pn_main.Controls.Add(form);
             form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             form.Dock = DockStyle.Fill;
-            form.Show();
+            activeForm.Show();
         }
 
         private void GoFullscreen(bool fullscreen)
@@ -77,7 +90,7 @@ namespace _3PL.View
             var idRole = _nhanVienService.GetAll().Where(p => p.SDT == Properties.Settings.Default.TKdaLogin).Select(p => p.MaCV).FirstOrDefault();
             if (idRole == 1)
             {
-                FrmNhanVien frmNhanVien = new FrmNhanVien();
+
                 ChangeForm(frmNhanVien);
                 panel_ttnv.Visible = false;
             }
@@ -85,33 +98,31 @@ namespace _3PL.View
             {
                 MessageBox.Show("Nhân viên không có quyền sử dụng chức năng này");
             }
-           
+
         }
 
         private void btn_hoadon_Click(object sender, EventArgs e)
         {
-            FrmHoaDon frmBanHang = new FrmHoaDon();
-            ChangeForm(frmBanHang);
+            ChangeForm(frmHoaDon);
             panel_ttnv.Visible = false;
         }
 
         private void btn_banhang_Click(object sender, EventArgs e)
         {
-            FrmBanHang frmBanHang = new FrmBanHang();
             ChangeForm(frmBanHang);
             panel_ttnv.Visible = false;
         }
 
         private void btn_sp_Click(object sender, EventArgs e)
         {
-            FrmQuanLySP frmQuanLySP = new FrmQuanLySP();
-            ChangeForm(frmQuanLySP);
+
+            ChangeForm(_frmQuanLySP);
             panel_ttnv.Visible = false;
         }
 
         private void btn_KhachHang_Click(object sender, EventArgs e)
         {
-            FrmKhachHang frmKhachHang = new FrmKhachHang();
+
             ChangeForm(frmKhachHang);
             panel_ttnv.Visible = false;
         }
@@ -169,7 +180,7 @@ namespace _3PL.View
                 {
                     var mkmoi = _nhanVienService.GetAll().FirstOrDefault();
                     mkmoi.matKhau = textBox_mkmoi.Text;
-                    
+
                     _nhanVienService.Update(mkmoi);
                     MessageBox.Show("Đổi mật khẩu thành công");
 
@@ -180,7 +191,7 @@ namespace _3PL.View
 
                 }
 
-              
+
             }
         }
 
@@ -203,8 +214,7 @@ namespace _3PL.View
 
         private void btn_thongke_Click(object sender, EventArgs e)
         {
-            FrmThongKe frmBanHang = new FrmThongKe();
-            ChangeForm(frmBanHang);
+            ChangeForm(frmThongKe);
             panel_ttnv.Visible = false;
         }
     }

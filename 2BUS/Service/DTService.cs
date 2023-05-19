@@ -12,7 +12,11 @@ namespace _2BUS.Service
 {
     public class DTService : IDTService
     {
-        IDTRepos _iDT = new DTRepos();
+        IDTRepos _iDT;
+        public DTService(IDTRepos dTRepos)
+        {
+            _iDT = dTRepos;
+        }
 
         public bool Add(DienThoai obj)
         {

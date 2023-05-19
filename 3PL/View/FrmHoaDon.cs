@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using _1DAL.Models;
+
 using _2BUS.IService;
-using _2BUS.Service;
 namespace _3PL.View
 {
     public partial class FrmHoaDon : Form
@@ -18,13 +19,13 @@ namespace _3PL.View
         private IHoaDonCTService_ _orderDetail;
         private IDTCTService _product;
         public int oID;
-        public FrmHoaDon()
+        public FrmHoaDon(IHoaDonService hoaDonService, IHoaDonCTService_ hoaDonCTService_, IDTCTService dTCTService)
         {
-            InitializeComponent();
-            _order = new HoaDonService();
-            _orderDetail = new HoaDonCTService();
-            _product = new DTCTService();
+            _order = hoaDonService;
+            _orderDetail = hoaDonCTService_;
+            _product = dTCTService;
             oID = 0;
+            InitializeComponent();
             LoadHoaDon();
         }
 
@@ -33,13 +34,13 @@ namespace _3PL.View
             dtg_hoadon.Rows.Clear();
             dtg_hoadonchitiet.Rows.Clear();
             var order = _order.GetAllViewView();
-            if(tbt_timk.Text != "")
+            if (tbt_timk.Text != "")
             {
                 order = order.Where(p => p.EmployeeEmail.ToLower().Contains(tbt_timk.Text.ToLower()) || p.Status.ToString().ToLower().Contains(tbt_timk.Text.ToLower())).ToList();
             }
             foreach (var item in order)
             {
-                dtg_hoadon.Rows.Add(item.ID, item.DateCreated, item.EmployeeEmail, item.CustomerPhoneNumber == "0" ? "Khách vãng lai" : item.CustomerPhoneNumber , item.TotalPrice, item.Status ==1 ? "Đã thanh toán" : "Chờ thanh toán", item.Note);
+                dtg_hoadon.Rows.Add(item.ID, item.DateCreated, item.EmployeeEmail, item.CustomerPhoneNumber == "0" ? "Khách vãng lai" : item.CustomerPhoneNumber, item.TotalPrice, item.Status == 1 ? "Đã thanh toán" : "Chờ thanh toán", item.Note);
             }
         }
         public void loadOrderDetail(int orderID)
@@ -48,9 +49,9 @@ namespace _3PL.View
             dtg_hoadonchitiet.Rows.Clear();
             foreach (var item in _orderDetail.GetAllViewView(orderID))
             {
-                dtg_hoadonchitiet.Rows.Add( item.MaSP,
+                dtg_hoadonchitiet.Rows.Add(item.MaSP,
                      item.tendienthoai,
-                    item.Soluong, 
+                    item.Soluong,
                     item.DonGia);
             }
         }

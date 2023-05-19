@@ -12,8 +12,8 @@ using _1DAL.ConText;
 namespace _1DAL.Migrations
 {
     [DbContext(typeof(DBContextDienThoai))]
-    [Migration("20230515063043_test")]
-    partial class test
+    [Migration("20230517183234_demo")]
+    partial class demo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -469,7 +469,7 @@ namespace _1DAL.Migrations
                             DiaChi = "Tuyên Quang",
                             GioiTinh = 1,
                             MaCV = 2,
-                            NgaySinh = new DateTime(2023, 5, 15, 13, 30, 43, 484, DateTimeKind.Local).AddTicks(5551),
+                            NgaySinh = new DateTime(2023, 5, 18, 1, 32, 34, 285, DateTimeKind.Local).AddTicks(5047),
                             SDT = "0379702133",
                             TenNV = "Nguyễn Văn Đạo",
                             TrangThai = 0,
@@ -481,7 +481,7 @@ namespace _1DAL.Migrations
                             DiaChi = "Hà Nam",
                             GioiTinh = 1,
                             MaCV = 1,
-                            NgaySinh = new DateTime(2023, 5, 15, 13, 30, 43, 484, DateTimeKind.Local).AddTicks(5560),
+                            NgaySinh = new DateTime(2023, 5, 18, 1, 32, 34, 285, DateTimeKind.Local).AddTicks(5058),
                             SDT = "0336253482",
                             TenNV = "Ngô Quốc Mạnh",
                             TrangThai = 0,

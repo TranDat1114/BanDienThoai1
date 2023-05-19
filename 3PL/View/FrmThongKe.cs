@@ -1,6 +1,8 @@
 ﻿using _1DAL.Models;
+
 using _2BUS.IService;
 using _2BUS.Service;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
 
 namespace _3PL.View
@@ -28,14 +31,14 @@ namespace _3PL.View
         public List<DienThoaiCT> _lstDTCT;
         public INhanVienService _nv;
         public List<NhanVien> _lstnv;
-        public FrmThongKe(IHoaDonService hoaDonService, IKhachHangService khachHangService, INhanVienService nhanVienService)
+        public FrmThongKe(IDTService dTService, IDTCTService dTCTService, IDungLuongService dungLuongService, IHoaDonService hoaDonService, IHoaDonCTService_ hoaDonCTService_, IKhachHangService khachHangService, INhanVienService nhanVienService)
         {
             InitializeComponent();
-            _dt = new DTService();
-            _dtct = new DTCTService();
-            _dungLuong = new DungLuongService();
+            _dt = dTService;
+            _dtct = dTCTService;
+            _dungLuong = dungLuongService;
             _hd = hoaDonService;
-            _hdct = new HoaDonCTService();
+            _hdct = hoaDonCTService_;
             _kh = khachHangService;
             _nv = nhanVienService;
             _lstnv = new List<NhanVien>();
@@ -46,7 +49,7 @@ namespace _3PL.View
             _lstDTCT = new List<DienThoaiCT>();
             LoadDate();
             loadData();
-           
+
         }
 
         public void LoadDate()
@@ -54,18 +57,20 @@ namespace _3PL.View
             for (int i = 1; i <= 12; i++)
             {
                 cbb_thang.Items.Add(i);
-              
+
             }
-            for (int i = Convert.ToInt32(_hd.GetAll().First().NgayBan.ToString("yyyy")); i <= Convert.ToInt32(_hd.GetAll().Last().NgayBan.ToString("yyyy")); i++)
-            {
-                cbb_nam.Items.Add(i);
-            }
+            //var x = Convert.ToInt32(_lstHoaDon.FirstOrDefault().NgayBan.ToString("yyyy"));
+            //var y = Convert.ToInt32(_lstHoaDon.LastOrDefault().NgayBan.ToString("yyyy"));
+            //for (int i = x; i <= y; i++)
+            //{
+            //    cbb_nam.Items.Add(i);
+            //}
 
         }
         public void loadData()
         {
             dtgv_show.Rows.Clear();
-          
+
             var data = (from a in _lstHoaDon
                         join b in _kh.GetAll()
                         on a.MaKH equals b.MaKH
@@ -73,12 +78,12 @@ namespace _3PL.View
                         select new { a, b, c }
                         );
 
-                      
+
             foreach (var item in data)
             {
-                dtgv_show.Rows.Add(item.a.MaHD, item.c.TenNV, item.a.Tong, item.a.NgayBan,item.b.SDT ,item.a.TrangThai == 1 ? "Đã thanh toán" : "Chưa thanh toán");
+                dtgv_show.Rows.Add(item.a.MaHD, item.c.TenNV, item.a.Tong, item.a.NgayBan, item.b.SDT, item.a.TrangThai == 1 ? "Đã thanh toán" : "Chưa thanh toán");
             }
-            
+
             lb_doanhthu.Text = data.Select(x => x.a).Distinct().Sum(x => x.Tong).ToString();
             lb_tonghd.Text = data.GroupBy(x => x.a).Count().ToString();
             lb_chuathanhtoan.Text = data.Select(x => x.a).Distinct().Where(x => x.TrangThai == 0).Count().ToString();
@@ -95,19 +100,19 @@ namespace _3PL.View
         private void dtp_ngay_ValueChanged_1(object sender, EventArgs e)
         {
             var a = dtp_ngay.Value.ToString("dd-MM-yyyy");
-            _lstHoaDon = _hd.GetAll().Where(x => x.NgayBan.ToString("dd-MM-yyyy")== a).ToList();
+            _lstHoaDon = _hd.GetAll().Where(x => x.NgayBan.ToString("dd-MM-yyyy") == a).ToList();
             loadData();
         }
 
 
         private void tb_sdt_TextChanged(object sender, EventArgs e)
         {
-            if(tb_sdt.Text != "")
+            if (tb_sdt.Text != "")
             {
                 _lstHoaDon = _hd.GetAll().Where(x => x.SDTKH.ToString().Contains(tb_sdt.Text)).ToList();
                 loadData();
             }
-            
+
         }
 
         private void btn_lammoi_Click(object sender, EventArgs e)

@@ -11,7 +11,12 @@ namespace _2BUS.Service
 {
     public class ChucVuService : IChucVuService
     {
-        IChucVuRepos _CV = new  ChucVuRepos();
+        IChucVuRepos _CV;
+        public ChucVuService(IChucVuRepos chucVuRepos)
+        {
+            _CV = chucVuRepos;
+        }
+
 
         public bool Add(ChucVu obj)
         {

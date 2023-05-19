@@ -12,7 +12,12 @@ namespace _2BUS.Service
 {
     public class DungLuongService : IDungLuongService
     {
-        IDungLuongRepos _dungLuong = new DungLuongRepos();
+        IDungLuongRepos _dungLuong;
+        public DungLuongService(IDungLuongRepos dungLuongRepos)
+        {
+            _dungLuong = dungLuongRepos;
+        }
+
         public bool Add(DungLuong obj)
         {
             _dungLuong.Add(obj);

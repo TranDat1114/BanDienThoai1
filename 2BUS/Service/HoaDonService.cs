@@ -1,8 +1,10 @@
 ﻿using _1DAL.IRepository;
 using _1DAL.Models;
 using _1DAL.Repositorys;
+
 using _2BUS.IService;
 using _2BUS.ViewModel;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +16,16 @@ namespace _2BUS.Service
     public class HoaDonService : IHoaDonService
     {
 
-        IHoaDonRepos _hd = new HoaDonRepos();
-      private  IKhachHangRepos _hkachHangRepos;
-        INhanVienRepos nhanVienRepos = new NhanVienRepos();
+        private IHoaDonRepos _hd;
+        private IKhachHangRepos _hkachHangRepos;
+        private INhanVienRepos _nhanVienRepos;
 
-        public HoaDonService(IKhachHangRepos khachHangRepos) {
+
+        public HoaDonService(IKhachHangRepos khachHangRepos, INhanVienRepos nhanVienRepos, IHoaDonRepos hoaDonRepos)
+        {
             _hkachHangRepos = khachHangRepos;
+            _nhanVienRepos = nhanVienRepos;
+            _hd = hoaDonRepos;
         }
         public bool Add(HoaDon obj)
         {
@@ -42,8 +48,8 @@ namespace _2BUS.Service
         {
             List<HoaDonView> list = new List<HoaDonView>();
             list = (from a in _hd.GetAll()
-                    join b in nhanVienRepos.GetAll() on a.MaNV equals b.MaNV
-                      join c in _hkachHangRepos.GetAll() on a.MaKH equals c.MaKH
+                    join b in _nhanVienRepos.GetAll() on a.MaNV equals b.MaNV
+                    join c in _hkachHangRepos.GetAll() on a.MaKH equals c.MaKH
 
                     select new HoaDonView()
                     {
@@ -58,7 +64,7 @@ namespace _2BUS.Service
         {
             var data = (from o in _hd.GetAll()
                         join c in _hkachHangRepos.GetAll() on o.MaKH equals c.MaKH
-                        join e in nhanVienRepos.GetAll() on o.MaNV equals e.MaNV
+                        join e in _nhanVienRepos.GetAll() on o.MaNV equals e.MaNV
                         select new HoaDonViewView
                         {
                             ID = o.MaHD,

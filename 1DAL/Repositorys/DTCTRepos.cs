@@ -11,7 +11,11 @@ namespace _1DAL.Repositorys
 {
     public class DTCTRepos : IDTCTRepos
     {
-        DBContextDienThoai _context = new DBContextDienThoai();
+        DBContextDienThoai _context;
+        public DTCTRepos(DBContextDienThoai dBContextDienThoai)
+        {
+            _context = dBContextDienThoai;
+        }
         public bool Add(DienThoaiCT dienThoaiCT)
         {
             _context.dienThoaiCTs.Add(dienThoaiCT);

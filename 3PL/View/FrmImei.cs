@@ -14,10 +14,11 @@ namespace _3PL.View
 {
     public partial class FrmImei : Form
     {
-        private IImeiService _ISV = new IMeiService();
+        private IImeiService _ISV;
         public Imei _IM;
-        public FrmImei()
+        public FrmImei(IImeiService imeiService)
         {
+            _ISV = imeiService;
             InitializeComponent();
             LoadTodata();
         }
