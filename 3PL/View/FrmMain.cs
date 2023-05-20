@@ -22,7 +22,8 @@ namespace _3PL.View
         FrmQuanLySP _frmQuanLySP;
         FrmKhachHang frmKhachHang;
         FrmThongKe frmThongKe;
-        public FrmMain(INhanVienService nhanVienService, IChucVuService chucVuService, FrmNhanVien frmNhanVien, FrmBanHang frmBanHang, FrmKhachHang frmKhachHang, FrmQuanLySP frmQuanLySP, FrmHoaDon frmHoaDon, FrmThongKe frmThongKe)
+        FrmDangNhap _frmDangNhap;
+        public FrmMain(INhanVienService nhanVienService, IChucVuService chucVuService, FrmNhanVien frmNhanVien, FrmBanHang frmBanHang, FrmKhachHang frmKhachHang, FrmQuanLySP frmQuanLySP, FrmHoaDon frmHoaDon, FrmThongKe frmThongKe, FrmDangNhap frmDangNhap)
         {
             _chucVuService = chucVuService;
             _nhanVienService = nhanVienService;
@@ -32,6 +33,7 @@ namespace _3PL.View
             this.frmKhachHang = frmKhachHang;
             this._frmQuanLySP = frmQuanLySP;
             this.frmThongKe = frmThongKe;
+            this._frmDangNhap = frmDangNhap;
             InitializeComponent();
             this.CenterToScreen();
             GoFullscreen(AutoSize);
@@ -39,6 +41,8 @@ namespace _3PL.View
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            _frmDangNhap.ShowDialog();
+
             var layEmail = Properties.Settings.Default.TKdaLogin;
             var nhanvien = _nhanVienService.GetAll().FirstOrDefault(p => p.MaNV == 1);
             var nhanvien1 = _nhanVienService.GetAll().FirstOrDefault(p => p.SDT == Properties.Settings.Default.TKdaLogin);
@@ -53,12 +57,14 @@ namespace _3PL.View
 
             panel_ttnv.Visible = true;
 
+
         }
+
         private Form activeForm;
         public void ChangeForm(Form form)
         {
             //Thêm logic tính chỉ đóng form đó khi đang không mở
-            if (activeForm != null && activeForm.Name != form.Name )
+            if (activeForm != null && activeForm.Name != form.Name)
             {
                 activeForm.Hide();
             }
@@ -185,8 +191,7 @@ namespace _3PL.View
                     MessageBox.Show("Đổi mật khẩu thành công");
 
                     this.Hide();
-                    FrmDangNhap login = new FrmDangNhap();
-                    login.ShowDialog();
+                    _frmDangNhap.ShowDialog();
                     this.Close();
 
                 }
@@ -200,10 +205,10 @@ namespace _3PL.View
             DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn đăng xuất không?", "Đăng xuất", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                this.Hide();
-                FrmDangNhap frmLogin = new FrmDangNhap();
-                frmLogin.ShowDialog();
-                this.Close();
+                //this.Hide();
+
+                _frmDangNhap.ShowDialog();
+                //this.Close();
             }
         }
 

@@ -13,9 +13,9 @@ using Microsoft.Extensions.Options;
 
 namespace _3PL
 {
-    internal static class Program
+    public static class Program
     {
-        private static void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
             // Đăng ký các dịch vụ của ứng dụng
             services.AddDbContext<DBContextDienThoai>(options => options.UseSqlServer("server=tranhoang\\moonserver; database=DuAnDT;Integrated Security=True"));
@@ -44,10 +44,10 @@ namespace _3PL
             services.AddTransient<IHSXService, HSXService>();
             services.AddTransient<IDTService, DTService>();
             
+            services.AddSingleton<FrmDangNhap>();
             services.AddSingleton<FrmMain>();
             services.AddSingleton<FrmNhanVien>();
             services.AddSingleton<FrmBanHang>();
-            services.AddSingleton<FrmDangNhap>();
             services.AddSingleton<FrmKhachHang>();
             services.AddSingleton<FrmDienThoai>();
             services.AddSingleton<FrmHoaDon>();
@@ -57,6 +57,7 @@ namespace _3PL
             services.AddSingleton<FrmImei>();
             services.AddSingleton<FrmDungLuong>();
             services.AddSingleton<FrmMauSac>();
+            services.AddSingleton<FrmQuenMK>();
             services.AddSingleton<FrmThongKe>();
 
             //services.AddTransient<SomeOtherForm>();
@@ -77,12 +78,10 @@ namespace _3PL
             ConfigureServices(services);
 
             // Tạo ServiceProvider từ DI Container
-            using (var serviceProvider = services.BuildServiceProvider())
-            {
-                // Khởi tạo và chạy ứng dụng
-                var form = serviceProvider.GetRequiredService<FrmMain>();
-                Application.Run(form);
-            }
+            using var serviceProvider = services.BuildServiceProvider();
+            // Khởi tạo và chạy ứng dụng
+            var form = serviceProvider.GetRequiredService<FrmMain>();
+            Application.Run(form);
 
         }
 

@@ -15,20 +15,16 @@ namespace _3PL.View
 {
     public partial class FrmDangNhap : Form
     {
-        IKhachHangService _khachhang;
-        INhanVienService _nhanvien;
+        private IKhachHangService _khachhang;
+        private INhanVienService _nhanvien;
         //INhanVienService inhanvienservice;
-        private FrmMain _FrmMain;
+       
         private FrmQuenMK quenMK;
-        public FrmDangNhap(IKhachHangService khachHangService, INhanVienService nhanVienService, FrmMain frmMain, FrmQuenMK quenMK)
+        public FrmDangNhap(IKhachHangService khachHangService, INhanVienService nhanVienService, FrmQuenMK quenMK)
         {
             _khachhang = khachHangService;
             _nhanvien = nhanVienService;
-            _FrmMain = frmMain;
             this.quenMK = quenMK;
-        }
-        public FrmDangNhap()
-        {
             InitializeComponent();
             //inhanvienservice = new NhanVienService();
             txtTK.Text = Properties.Settings.Default.tk;
@@ -62,33 +58,41 @@ namespace _3PL.View
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (txtTK.Text == "" || txtMK.Text == "")
+            try
             {
-                MessageBox.Show("Bạn phải nhập tên đăng nhập và mật khẩu");
-            }
-            else
-            {
-                var login = _nhanvien.GetAll().FirstOrDefault(p => p.SDT == txtTK.Text && p.matKhau == txtMK.Text);
 
-                if (login != null)
+
+                if (txtTK.Text == "" || txtMK.Text == "")
                 {
-                    if (login.TrangThai == 1)
-                    {
-                        MessageBox.Show("Nhân viên đã nghỉ việc không thể đăng nhập bằng tài khoản này", "Chú ý");
-                    }
-                    else
-                    {
-                        saveInfor();
-                        this.Hide();
-                        _FrmMain.ShowDialog();
-                        this.Close();
-                    }
-
+                    MessageBox.Show("Bạn phải nhập tên đăng nhập và mật khẩu");
                 }
                 else
                 {
-                    MessageBox.Show("Tài khoản hoặc mật khẩu sai");
+                    var login = _nhanvien.GetAll().FirstOrDefault(p=>p.SDT == txtTK.Text && p.matKhau == txtMK.Text);
+
+                    if (login != null)
+                    {
+                        if (login.TrangThai == 1)
+                        {
+                            MessageBox.Show("Nhân viên đã nghỉ việc không thể đăng nhập bằng tài khoản này", "Chú ý");
+                        }
+                        else
+                        {
+                            saveInfor();
+                            this.Close();
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tài khoản hoặc mật khẩu sai");
+                    }
                 }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Lỗi đăng nhập");
             }
         }
 
